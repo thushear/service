@@ -89,7 +89,9 @@ public class NIOTimeClientHandler implements Runnable{
     private void doConnect() throws IOException {
 
         if (socketChannel.connect(new InetSocketAddress(host,port))){
+
             socketChannel.register(selector, SelectionKey.OP_READ);
+            doWrite(socketChannel);
 
         }else {
             socketChannel.register(selector,SelectionKey.OP_CONNECT);
